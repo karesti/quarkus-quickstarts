@@ -6,7 +6,7 @@ networks:
 
 services:
   infinispan-server:
-    image: infinispan/server:latest
+    image: infinispan/server:12.0
     environment:
       - USER=Titus Bramble
       - PASS=Shambles
@@ -20,6 +20,8 @@ services:
     ports:
       - "8081:8081"
     container_name: client
+    environment:
+      - QUARKUS_INFINISPAN_CLIENT_SERVER_LIST=infinispan:11222
     depends_on:
       - infinispan-server
     networks:

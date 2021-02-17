@@ -44,4 +44,4 @@ COPY target/*-runner.jar /deployments/app.jar
 EXPOSE 8080
 USER 1001
 
-ENTRYPOINT [ "/deployments/run-java.sh", "-Dquarkus.infinispan-client.server-list=infinispan:11222"]
+ENTRYPOINT [ "/deployments/run-java.sh"]

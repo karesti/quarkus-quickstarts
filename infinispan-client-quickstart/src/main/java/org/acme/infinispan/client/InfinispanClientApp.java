@@ -4,8 +4,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.infinispan.client.hotrod.DefaultTemplate;
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 import org.infinispan.commons.configuration.XMLStringConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +22,12 @@ public class InfinispanClientApp {
     @Inject
     RemoteCacheManager cacheManager;
 
-    private static final String CACHE_CONFIG = "<infinispan><cache-container>" +
-            "<distributed-cache name=\"%s\"></distributed-cache>" +
-            "</cache-container></infinispan>";
+    private static final String CACHE_CONFIG =
+          "<infinispan><cache-container>" +
+                "  <distributed-cache name=\"mycache\" statistics=\"true\">" +
+                "    <encoding media-type=\"application/x-protostream\"/>" +
+                "  </distributed-cache>" +
+                "</cache-container></infinispan>";
 
     void onStart(@Observes StartupEvent ev) {
         LOGGER.info("Create or get cache named mycache with the default configuration");
