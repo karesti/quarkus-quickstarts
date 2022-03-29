@@ -10,9 +10,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import io.quarkus.runtime.Quarkus;
+import io.quarkus.runtime.QuarkusApplication;
+import io.quarkus.runtime.annotations.QuarkusMain;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 @Path("/weather")
+@QuarkusMain
 public class WeatherForecastResource {
 
     @Inject
@@ -28,5 +32,9 @@ public class WeatherForecastResource {
                 service.getDailyForecast(LocalDate.now().plusDays(daysInFuture + 2L), city));
         long executionEnd = System.currentTimeMillis();
         return new WeatherForecast(dailyForecasts, executionEnd - executionStart);
+    }
+
+    public static void main(String[] args) {
+        Quarkus.run(args);
     }
 }
