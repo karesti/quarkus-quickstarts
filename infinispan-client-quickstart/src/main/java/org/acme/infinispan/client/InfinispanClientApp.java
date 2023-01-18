@@ -17,8 +17,13 @@ public class InfinispanClientApp {
     @Remote("mycache")
     RemoteCache<String, String> cache;
 
+    @Inject
+    @Remote("pepe")
+    RemoteCache<String, String> coco;
+
     void onStart(@Observes StartupEvent ev) {
         Log.info("Get cache named mycache and add put a key/value");
         cache.put("hello", "Hello World, Infinispan is up!");
+        coco.put("pepe", "pepe");
     }
 }
