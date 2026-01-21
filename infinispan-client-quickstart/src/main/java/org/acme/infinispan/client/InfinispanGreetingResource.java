@@ -7,8 +7,6 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import org.infinispan.client.hotrod.RemoteCache;
 
-import java.util.concurrent.CompletionStage;
-
 @Path("/greeting")
 public class InfinispanGreetingResource {
 
@@ -18,7 +16,7 @@ public class InfinispanGreetingResource {
 
     @POST
     @Path("/{id}")
-    public CompletionStage<String> postGreeting(String id, Greeting greeting) {
+    public String postGreeting(String id, Greeting greeting) {
         return cache.putAsync(id, greeting)
               .thenApply(g -> "Greeting added!")
               .exceptionally(ex -> ex.getMessage());
@@ -26,7 +24,7 @@ public class InfinispanGreetingResource {
 
     @GET
     @Path("/{id}")
-    public CompletionStage<Greeting> getGreeting(String id) {
+    public Greeting getGreeting(String id) {
         return cache.getAsync(id);
     }
 }

@@ -2,6 +2,9 @@ package org.acme.infinispan.cache;
 
 import io.quarkus.cache.CacheKey;
 import io.quarkus.cache.CacheResult;
+import io.quarkus.infinispan.client.Remote;
+
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -12,11 +15,16 @@ import org.infinispan.protostream.annotations.ProtoSchema;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.infinispan.client.hotrod.RemoteCache;
 
 @Path("/fruits")
 public class FruitsExpensiveResource {
 
     private final AtomicInteger invocations = new AtomicInteger(0);
+
+   @Inject
+   @Remote("fruits")
+   RemoteCache<String, ExpensiveFruitsResponse> cache;
 
     @GET
     @Path("/{country}/{city}/{name}")
