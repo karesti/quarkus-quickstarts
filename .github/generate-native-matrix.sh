@@ -26,4 +26,24 @@ for module in ${modules[@]}; do
 done
 json+=$'"\n    }\n    ]\n}\n'
 
-echo "$json"
+mytest=$'{
+            "include": [
+            {
+                "category": "Native Tests - 1",
+                "test-modules": "amazon-dynamodb-quickstart,"
+            },
+            {
+                "category": "Native Tests - 2",
+                "test-modules": "infinispan-client-quickstart,infinispan-cache-quickstart,"
+            },
+            {
+                "category": "Native Tests - 3",
+                "test-modules": "liquibase-quickstart"
+            },
+            {
+                "category": "Native Tests - 4",
+                "test-modules": "security-ldap-quickstart,"
+            }
+            ]
+        }'
+echo "$mytest"
