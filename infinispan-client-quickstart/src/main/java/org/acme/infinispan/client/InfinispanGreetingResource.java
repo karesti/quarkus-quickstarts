@@ -17,14 +17,12 @@ public class InfinispanGreetingResource {
     @POST
     @Path("/{id}")
     public String postGreeting(String id, Greeting greeting) {
-        return cache.putAsync(id, greeting)
-              .thenApply(g -> "Greeting added!")
-              .exceptionally(ex -> ex.getMessage());
+        return cache.put(id, greeting).name();
     }
 
     @GET
     @Path("/{id}")
     public Greeting getGreeting(String id) {
-        return cache.getAsync(id);
+        return cache.get(id);
     }
 }
