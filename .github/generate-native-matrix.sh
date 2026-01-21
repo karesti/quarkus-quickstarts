@@ -34,7 +34,7 @@ mytest=$'{
             },
             {
                 "category": "Native Tests - 2",
-                "test-modules": "infinispan-client-quickstart,infinispan-cache-quickstart,"
+                "test-modules": "infinispan-cache-quickstart,infinispan-client-quickstart"
             },
             {
                 "category": "Native Tests - 3",
