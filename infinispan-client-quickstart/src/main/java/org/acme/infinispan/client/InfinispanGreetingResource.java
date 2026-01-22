@@ -17,7 +17,8 @@ public class InfinispanGreetingResource {
     @POST
     @Path("/{id}")
     public String postGreeting(String id, Greeting greeting) {
-        return cache.put(id, greeting).name();
+        cache.put(id, greeting);
+        return id;
     }
 
     @GET
