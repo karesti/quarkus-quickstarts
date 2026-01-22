@@ -60,23 +60,19 @@ jobs:
           # refresh cache every month to avoid unlimited growth
           key: q2maven-native-${{ steps.get-date.outputs.date }}
 
-      - name: Install JDK 25
+      - name: Install JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 25
+          java-version: 17
 
       - name: Build Quarkus main
         id: build-quarkus
         run: |
           echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          git clone https://github.com/infinispan/infinispan.git
-          cd infinispan
-          ./mvnw -T1C -e -B --settings maven-settings.xml  clean install -DskipTests=true
-          cd ..
           git clone https://github.com/karesti/quarkus.git
           cd quarkus
-          git checkout 16.2.0-SNAPSHOT
+          git checkout init-remotecachemanager-non-blocking
           ./mvnw -T1C -e -B --settings .github/mvn-settings.xml clean install -Dquickly-ci -Prelocations
 
       - name: Build Quickstarts with Native
