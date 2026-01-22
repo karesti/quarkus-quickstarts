@@ -29,20 +29,8 @@ json+=$'"\n    }\n    ]\n}\n'
 mytest=$'{
             "include": [
             {
-                "category": "Native Tests - 1",
-                "test-modules": "amazon-dynamodb-quickstart,"
-            },
-            {
                 "category": "Native Tests - 2",
                 "test-modules": "infinispan-cache-quickstart,infinispan-client-quickstart"
-            },
-            {
-                "category": "Native Tests - 3",
-                "test-modules": "liquibase-quickstart"
-            },
-            {
-                "category": "Native Tests - 4",
-                "test-modules": "security-ldap-quickstart,"
             }
             ]
         }'
