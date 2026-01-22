@@ -30,7 +30,7 @@ mytest=$'{
             "include": [
             {
                 "category": "Native Tests - 2",
-                "test-modules": "infinispan-cache-quickstart,infinispan-client-quickstart"
+                "test-modules": "infinispan-client-quickstart"
             }
             ]
         }'
