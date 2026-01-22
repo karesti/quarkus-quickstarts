@@ -70,10 +70,13 @@ jobs:
         id: build-quarkus
         run: |
           echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-          git clone https://github.com/quarkusio/quarkus.git
+          git clone https://github.com/infinispan/infinispan.git
+          cd infinispan
+          ./mvnw -T1C -e -B --settings maven-settings.xml  clean install -DskipTests=true
+          cd ..
+          git clone https://github.com/karesti/quarkus.git
           cd quarkus
-          git fetch --tags
-          git checkout tags/3.31.0 -b test-3.31.0 
+          git checkout 16.2.0-SNAPSHOT
           ./mvnw -T1C -e -B --settings .github/mvn-settings.xml clean install -Dquickly-ci -Prelocations
 
       - name: Build Quickstarts with Native
